@@ -1,6 +1,6 @@
 /*
- * from openssl src code: md5 version.
- */
+ * 使用openssl源码中的md5版本.
+*/
  
 #ifndef MD5_INCLUDED
 #define MD5_INCLUDED

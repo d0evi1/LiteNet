@@ -2,6 +2,8 @@
  * TCP服务器实现
  * 使用epoll方式
  *
+ * author:  d0evi0
+ * date:    2012.6.12
  */
 
 #ifndef _TCP_SERVER_H_

@@ -2,7 +2,7 @@
  * libevent轻量级封装: Light c++ wrapper Of Libevent  (LOL)
  * Packer.h
  * @brief	组包、解包工具类
- * @author 	jolly wang
+ * @author  d0evi1	
  * @date	2012.7.16
  **************************************************************/
 #ifndef _LOL_SERIALIZER_H_
