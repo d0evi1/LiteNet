@@ -18,6 +18,10 @@ typedef int SOCKET;
 #define	SOCKET_ERROR				-1
 #define	SOCKET_ERROR_WOULDBLOCK		-100
 
+#ifndef MSG_NOSIGNAL
+#define MSG_NOSIGNAL MSG_HAVEMORE
+#endif
+
 
 // 正常通信函数
 int		socketapi_socket(int domain, int type, int protocol);

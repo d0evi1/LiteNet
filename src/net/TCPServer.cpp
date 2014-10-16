@@ -16,7 +16,7 @@
 /*
  * ≥ı ºªØ
  */
-int	TCPServer::InitServer(Logger* pLogger, const char* szIP, uint16_t wPort, int nBacklog, 
+int	TCPServer_InitServer(Logger* pLogger, const char* szIP, uint16_t wPort, int nBacklog, 
 					int iMaxSocketNum, int iTimeoutMS)
 {
 	if(szIP == NULL)
@@ -58,14 +58,14 @@ int	TCPServer::InitServer(Logger* pLogger, const char* szIP, uint16_t wPort, int
 	return 0;
 }
 
-int TCPServer::CloseConnection(SOCKET iSocket)
+int TCPServer_CloseConnection(SOCKET iSocket)
 {
 	if(iSocket <= 0)
 	{
 		return -1;
 	}
 
-	int iRet = SocketAPI::Close(iSocket);
+	int iRet = socketapi_close(iSocket);
 	if(iRet < 0)
 	{
 		LOG_ERROR(m_pLogger, "Close() failed!");

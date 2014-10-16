@@ -99,7 +99,7 @@ int SocketInputStream_Read(SocketInputStream* pStream, void* cBuf, uint32_t dwLe
 		else 
 		{
 			memcpy(cBuf, &pStream->cBuf[dwHead], dwRightLen);
-			memcpy(cBuf+dwRightLen, pStream->cBuf, dwLen-dwRightLen);
+			memcpy((char*)cBuf+dwRightLen, pStream->cBuf, dwLen-dwRightLen);
 		}
 	}
 
@@ -141,7 +141,7 @@ int SocketInputStream_Peek(SocketInputStream* pStream, void* cBuf, uint32_t dwLe
 		else 
 		{
 			memcpy(cBuf, &pStream->cBuf[dwHead], dwRightLen);
-			memcpy(cBuf+dwRightLen, &pStream->cBuf[0], dwLen-dwRightLen);
+			memcpy((char*)cBuf+dwRightLen, &pStream->cBuf[0], dwLen-dwRightLen);
 		}
 	}
 

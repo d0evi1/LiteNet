@@ -165,12 +165,12 @@ static inline void ListSpliceInit(ListHead *list, ListHead *head)
 }
 
 /*
- * 外部函数
- * 获取链节点中初始地址，注意括号: 
+ * 外部函数 (涉及到指针运算，32位和64位，使用unsigned long)
+ * 获取链节点中初始地址，注意括号:  
  * 计算方式: src_address = (head - offset)
  */
 #define LIST_ENTRY(ptr, type, member) \
-	((type*)((char*)(ptr)-(uint32_t)(&((type*)0)->member)))
+	((type*)((char*)(ptr)-(unsigned long)(&((type*)0)->member)))
 
 
 /*
