@@ -111,8 +111,30 @@
 #define END_TAG			0x9
 
 //----------------------------------------------
-//
+// 返回方式
 //----------------------------------------------
+#define RET_LN()    {return -__LINE__;}
+
+/*
+ * 简化函数返回
+ * EQ   =>  '='
+ * NEQ  =>  '!='
+ */
+#define RET_EQ(func, val, ret)      if((func)==(val)){return (ret);}
+#define RET_NEQ(func, val, ret)     \
+    do{\
+        int iFuncRet=(func);\
+        if(iFuncRet != (val)) \
+        {\
+            return (ret);\
+        }} while(0) 
+
+/*
+ * NZ   => "!=0"
+ * NN   => "!=NULL"
+ */
+#define RET_NZ(func, ret)   RET_NEQ((func), (0), (ret))
+#define RET_NN(func, ret)   RET_NEQ((func), (NULL), (ret))
 
 
 #endif
