@@ -71,14 +71,14 @@ int Logger_ShiftFile(Logger* pLogger)
 
 	switch (pLogger->iType) 
 	{
-	case LOG_LOOP:
+	case T_LOG_LOOP:
 		if (stStat.st_size < (int)pLogger->dwMaxSize) 
 		{
 			return 0;
 		}
 		break;
 
-	case LOG_DAY:
+	case T_LOG_DAY:
 		if (pLogger->stLastTime - stStat.st_mtime > 86400) 
 		{
 			break;
@@ -92,7 +92,7 @@ int Logger_ShiftFile(Logger* pLogger)
 		}
 		break;
 
-	case LOG_HOUR:
+	case T_LOG_HOUR:
 		if (pLogger->stLastTime - stStat.st_mtime > 3600) 
 		{
 			break;

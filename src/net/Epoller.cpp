@@ -59,7 +59,7 @@ int	Epoller_Init(Epoller* pEpoller, Logger* pLogger, int iMaxSocketNum)
 	{
 		if (errno != ENOSYS)
 		{
-			LOG_ERROR(pEpoller->pLogger, "epoll_create fail");
+			XLOG_ERROR(pEpoller->pLogger, "epoll_create fail");
 		}
 		return -2;
 	}
@@ -68,7 +68,7 @@ int	Epoller_Init(Epoller* pEpoller, Logger* pLogger, int iMaxSocketNum)
 	pEpoller->pEvents = new epoll_event[iMaxSocketNum];
 	if(pEpoller->pEvents == NULL)
 	{
-		LOG_ERROR(pEpoller->pLogger, "new epoll_event() fail");
+		XLOG_ERROR(pEpoller->pLogger, "new epoll_event() fail");
 		return -3;
 	}
 
@@ -182,12 +182,12 @@ int Epoller_EventAdd(Epoller* pEpoller, SOCKET iSocket, int iFlag)
 		// ADD已存在，尝试MOD
 		if (errno != EEXIST || epoll_ctl(pEpoller->iEpollFd, EPOLL_CTL_MOD, iSocket, &stEvent) < 0) 
 		{
-			LOG_ERROR(pEpoller->pLogger, "epoll_ctl add failed: %s", strerror(errno));
+			XLOG_ERROR(pEpoller->pLogger, "epoll_ctl add failed: %s", strerror(errno));
 			return -1;
 		} 
 		else 
 		{
-			LOG_WARN(pEpoller->pLogger, "epoll_ctl add failed.");
+			XLOG_WARN(pEpoller->pLogger, "epoll_ctl add failed.");
 		}
 	}
 
@@ -218,12 +218,12 @@ int Epoller_EventMod(Epoller* pEpoller, SOCKET iSocket, int iFlag)
 		// ADD已存在，尝试MOD
 		if( (errno != ENOENT) && epoll_ctl(pEpoller->iEpollFd, EPOLL_CTL_ADD, iSocket, &stEvent) < 0)
 		{
-			LOG_ERROR(pEpoller->pLogger, "epoll_ctl MOD fail: %s", strerror(errno));
+			XLOG_ERROR(pEpoller->pLogger, "epoll_ctl MOD fail: %s", strerror(errno));
 			return -11;
 		} 
 		else 
 		{
-			LOG_WARN(pEpoller->pLogger, "[warn] epoll_ctl mod fail");	
+			XLOG_WARN(pEpoller->pLogger, "[warn] epoll_ctl mod fail");	
 			return -12;
 		}
 	}
@@ -252,7 +252,7 @@ int Epoller_EventDel(Epoller* pEpoller, int iSocket)
 	iRet = epoll_ctl(pEpoller->iEpollFd, EPOLL_CTL_DEL, iSocket, &stEvent);
 	if (iRet < 0 && (errno == ENOENT || errno == EBADF ||errno == EPERM) ) 
 	{
-		LOG_ERROR(pEpoller->pLogger, "epoll_ctl del: %s.", strerror(errno));
+		XLOG_ERROR(pEpoller->pLogger, "epoll_ctl del: %s.", strerror(errno));
 		return -3;
 	}
 
@@ -269,7 +269,7 @@ int Epoller_WaitEvent(Epoller* pEpoller, int iTimeoutMsec)
 	{
 		if(errno != EAGAIN && errno != EINTR)
 		{
-			LOG_ERROR(pEpoller->pLogger, "epoll_wait error!");
+			XLOG_ERROR(pEpoller->pLogger, "epoll_wait error!");
 		}
 		
 		return -1;

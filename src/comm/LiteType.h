@@ -130,11 +130,20 @@
         }} while(0) 
 
 /*
- * NZ   => "!=0"
- * NN   => "!=NULL"
+ * EZ (equal zero)   => "!=0"
+ * EN (equal null)  => "!=NULL"
+ */
+#define RET_EZ(func, ret)   RET_EQ((func), (0), (ret))
+#define RET_NN(func, ret)   RET_EQ((func), (NULL), (ret))
+
+/*
+ * NZ (not zero)  => "!=0"
+ * NN (not null)  => "!=NULL"
  */
 #define RET_NZ(func, ret)   RET_NEQ((func), (0), (ret))
 #define RET_NN(func, ret)   RET_NEQ((func), (NULL), (ret))
+
+
 
 
 #endif

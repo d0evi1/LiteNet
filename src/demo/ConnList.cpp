@@ -16,7 +16,7 @@ int ConnList_Init(ConnList* pList, Logger* pLogger)
 	pList->pConnections = new Connection[MAX_CONN_NUM];
 	if(pList->pConnections == NULL)
 	{
-		LOG_ERROR(pList->pLogger, "ConnectionPool: new() fail.");
+		XLOG_ERROR(pList->pLogger, "ConnectionPool: new() fail.");
 		return -2;
 	}
 
@@ -46,7 +46,7 @@ Connection*	ConnList_Add(ConnList* pList, int iSocket, CONN_STAT iStat)
 	}
 
 	// ±íÊ¾Âú
-	LOG_WARN(pList->pLogger, "ConnectionPool is Full.");
+	XLOG_WARN(pList->pLogger, "ConnectionPool is Full.");
 	return NULL;
 }
 
@@ -68,7 +68,7 @@ Connection*	ConnList_Get(ConnList* pList, int iSocket)
 		}
 	}
 
-	LOG_WARN(pList->pLogger, "not exist socket.");
+	XLOG_WARN(pList->pLogger, "not exist socket.");
 	return NULL;
 }
 

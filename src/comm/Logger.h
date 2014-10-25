@@ -15,9 +15,9 @@
  * 写日志的方式
  */
 typedef enum {
-	LOG_LOOP	= 0,			// 按文件大小循环写
-	LOG_DAY		= 1,			// 按天写
-	LOG_HOUR	= 2,			// 按小时写
+	T_LOG_LOOP	= 0,			// 按文件大小循环写
+	T_LOG_DAY		= 1,			// 按天写
+	T_LOG_HOUR	= 2,			// 按小时写
 } LOG_TYPE;
 
 
@@ -26,45 +26,49 @@ typedef enum {
  * @breif 	日志级别定义
  */
 typedef enum {
-	LOG_OFF			= 1,
-	LOG_ERROR		= 2,
-	LOG_WARN		= 3,
-	LOG_INFO		= 4,
-	LOG_DEBUG		= 5,
-	LOG_DEBUGBUF	= 6,
-	LOG_ALL			= 7
+	L_LOG_OFF		= 1,
+	L_LOG_ERROR		= 2,
+	L_LOG_WARN		= 3,
+	L_LOG_INFO		= 4,
+	L_LOG_DEBUG		= 5,
+	L_LOG_DEBUGBUF	= 6,
+	L_LOG_ALL		= 7
 } LOG_LEVEL;
 
 /*
  * @breif 	helper 宏
  */
-#define LOG_ERROR(logger,fmt,args...)	do{\
-											if( ((logger) != NULL) \
-												&& ((logger)->iLogLevel >= LOG_ERROR) ){\
-												Logger_Log(logger, "[ERROR] "fmt" [%s:%d:%s()]",##args,__FILE__,__LINE__,__FUNCTION__);\
-											}\
-										}while(0)
+#define XLOG_ERROR(logger,fmt,args...)	\
+    do{\
+		if( ((logger) != NULL) \
+			&& ((logger)->iLogLevel >= L_LOG_ERROR) ){\
+			Logger_Log(logger, "[ERROR] "fmt" [%s:%d:%s()]",##args,__FILE__,__LINE__,__FUNCTION__);\
+	    }\
+	}while(0)
 
-#define LOG_WARN(logger,fmt,args...)	do{\
-											if( ((logger) != NULL) \
-												&& ((logger)->iLogLevel >= LOG_WARN) ){\
-												Logger_Log(logger, "[WARN] "fmt,##args);\
-											}\
-										}while(0)
+#define XLOG_WARN(logger,fmt,args...)	\
+    do{\
+	    if( ((logger) != NULL) \
+		&& ((logger)->iLogLevel >= L_LOG_WARN) ){\
+			Logger_Log(logger, "[WARN] "fmt,##args);\
+	    }\
+	}while(0)
 
-#define LOG_INFO(logger,fmt,args...)	do{\
-											if( ((logger) != NULL) \
-												&& ((logger)->iLogLevel >= LOG_INFO) ){\
-												Logger_Log(logger, "[INFO] "fmt,##args);\
-											}\
-										}while(0)
+#define XLOG_INFO(logger,fmt,args...)	\
+    do{\
+		if( ((logger) != NULL) \
+		&& ((logger)->iLogLevel >= L_LOG_INFO) ){\
+			Logger_Log(logger, "[INFO] "fmt,##args);\
+		}\
+	}while(0)
 
-#define LOG_DEBUG(logger,fmt,args...)	do{\
-											if( ((logger) != NULL) \
-												&& ((logger)->iLogLevel >= LOG_DEBUG) ){\
-												Logger_Log(logger, "[DEBUG] "fmt" [%s:%d:%s()]",##args,__FILE__,__LINE__,__FUNCTION__);\
-											}\
-										}while(0)
+#define XLOG_DEBUG(logger,fmt,args...)	\
+    do{\
+		if( ((logger) != NULL) \
+		&& ((logger)->iLogLevel >= L_LOG_DEBUG) ){\
+		    Logger_Log(logger, "[DEBUG] "fmt" [%s:%d:%s()]",##args,__FILE__,__LINE__,__FUNCTION__);\
+		}\
+	}while(0)
 
 
 
